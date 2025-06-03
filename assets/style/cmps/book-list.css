@@ -1,7 +1,11 @@
 .book-list-container {
     list-style: none;
-    display: flex;
-
-
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    width: 95vw;
+    height: 95vh;
+    flex-wrap: wrap;
+    gap: 10px;
+    
 }
 

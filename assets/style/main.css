@@ -14,5 +14,7 @@
 @import "pages/bookindex.css";
 
 /* Components */
-@import "cmps/app-header.css"
-@import "cmps/book-list.css"
+@import "cmps/app-header.css";
+@import "cmps/book-list.css";
+@import "cmps/book-preview.css";
+
