@@ -1,0 +1,29 @@
+.logo-h1 {
+    font-family:fantasy;
+}
+.app-header-container {
+    background-color: mediumvioletred;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 10px; 
+}
+
+.app-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 40px;
+    font-size: smaller;
+}
+
+.app-nav a.active {
+    text-decoration: underline;
+    color: palegoldenrod;
+    font-weight: 600;
+}
+
+.app-header-container a,h1 {
+    color: white;
+}
