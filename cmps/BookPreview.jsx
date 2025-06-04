@@ -1,11 +1,12 @@
 
 export function BookPreview({book, idx}){
     return(
-        <article className="book-preview-container" style={{backgroundImage:`url(../assets/BooksImages/${idx+1}.jpg)`}}>
-            <h1>{book.title}</h1>
-            <h3>Author: {book.authors}</h3>
+        <article className="book-preview-container" >
+            <span>{book.title}</span>
+            <span>Author: {book.authors}</span>
+            <span>Price: {book.listPrice.amount} {book.listPrice.currencyCode}</span>
+            <img src={`../assets/BooksImages/${idx+1}.jpg`} alt={`${book.title} image`} />
             <p>Book Description: {book.description}</p>
-            <h6>Price: {book.listPrice.amount} {book.listPrice.currencyCode}</h6>
         </article>
     )
 }
