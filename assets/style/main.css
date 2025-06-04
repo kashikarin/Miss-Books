@@ -12,6 +12,8 @@
 @import "pages/homepage.css";
 @import "pages/aboutus.css";
 @import "pages/bookindex.css";
+@import "pages/book-details.css";
+
 
 /* Components */
 @import "cmps/app-header.css";

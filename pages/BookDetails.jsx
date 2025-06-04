@@ -52,28 +52,34 @@ export function BookDetails(){
     return(
             <section className="book-details-container">
                 <article className="book-details-tags">
-                    {book.listPrice.isOnSale && <span>On Sale</span>}
-                    {getPageCountTag() && <span>{getPageCountTag()}</span>}
-                    {getPublishedDateTag() && <span>{getPublishedDateTag()}</span>}
+                    {book.listPrice.isOnSale && <p className='book-details-onsale-tag'>On Sale</p>}
+                    {getPageCountTag() && <p className='book-details-page-count-tag'>{getPageCountTag()}</p>}
+                    {getPublishedDateTag() && <p className='book-details-published-date-tag'>{getPublishedDateTag()}</p>}
                 </article>
                 <articles className="book-details-list">
-                    <p>{book.title}</p>
-                    <p>{book.subTitle}</p>
-                    <p>{[...book.authors]}</p>
-                    <p>{book.publishedDate}</p>
-                    <p>{book.description}</p>
-                    <p>{book.pageCount}</p>
-                    <img src={`${book.thumbnail}`} alt={`${book.title} cover image`} />
-                    <p>Number of pages: {book.pageCount}</p>
-                    <p>Language: {book.language}</p>
-                    <p>{[...book.categories]}</p>
-                    <p>Price: <span style={{color: getPriceColor()}}>{book.listPrice.amount + book.listPrice.currencyCode}</span></p>
+                    <div className="book-details-grid1">
+                        <p>Title<span>: {book.title}</span></p>
+                        <p>Subtitle<span>: {book.subtitle}</span></p>
+                        <p>{book.authors.length > 1? 'Authors:' : 'Author:' }<span>: {[...book.authors]}</span></p>
+                        <p>Published on<span>: {book.publishedDate}</span></p>
+                        <p>Number of pages<span>: {book.pageCount}</span></p>
+                        <p>Language<span>: {book.language}</span></p>
+                        <p>Categories<span>: {[...book.categories]}</span></p>
+                        <p>Price<span>: </span><span style={{color: getPriceColor()}}> {book.listPrice.amount + book.listPrice.currencyCode}</span></p>
+                    </div>
+                    <div className="book-details-grid2">
+                        <img src={`${book.thumbnail}`} alt={`${book.title} cover image`} />
+                    </div>
+                    <div className="book-details-grid3">
+                        <p>Description<span>{book.description}</span></p>
+                    </div>
                 </articles>
                 <article className="next-prev-btns">
                     <Link to={`/book/${book.prevBookId}`}><button>Previous</button></Link>
                     <Link to={`/book/${book.nextBookId}`}><button>Next</button></Link>
-                    <button onClick={handleBack}>Back</button>
                 </article>
+                <button className='book-details-back-btn' onClick={handleBack}>Back</button>
+                
             </section>
     )
 }
