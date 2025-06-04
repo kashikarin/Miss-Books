@@ -1,6 +1,7 @@
 import { bookService } from "../services/book.service.js"
 import { BookList } from "../cmps/BookList.jsx"
 import {BooksFilter} from '../cmps/BooksFilter.jsx'
+import { BookDetails } from "./BookDetails.jsx"
 
 const {useState, useEffect} = React
 
@@ -34,12 +35,14 @@ export function BookIndex(){
     }
 
 
+
+
     if (!books) return <h1>Loading...</h1>
     return(
         <section className="book-index-container">
         <BooksFilter priceRange={getMinMaxPrice()} filterBy={filterBy} onSetFilter={onSetFilter}/>
-        <BookList books={books}/>
-           
+        <BookList books={books} />
+        <BookDetails />
         </section>        
     )
 }
