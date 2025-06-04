@@ -1,5 +1,7 @@
 .logo-h1 {
     font-family:fantasy;
+    text-shadow: 1px 1px 3px rgb(49, 44, 44);
+    letter-spacing:;
 }
 .app-header-container {
     background-color: mediumvioletred;
