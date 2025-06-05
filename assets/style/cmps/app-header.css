@@ -1,12 +1,12 @@
 .logo-h1 {
     font-family:fantasy;
     text-shadow: 1px 1px 3px rgb(49, 44, 44);
-    letter-spacing:;
+    margin: 0;
+    line-height: 1;
 }
 .app-header-container {
     background-color: mediumvioletred;
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     padding-inline: 10px; 
@@ -14,12 +14,18 @@
 
 .app-nav {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
     gap: 40px;
     font-size: smaller;
+    align-items: center;
+    justify-content: flex-end;
 }
 
+
+.app-nav a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
 .app-nav a.active {
     text-decoration: underline;
     color: palegoldenrod;
@@ -28,4 +34,24 @@
 
 .app-header-container a,h1 {
     color: white;
+}
+
+@media screen and (max-width: 500px) {
+    
+    .app-header-container {
+        background-color: mediumvioletred;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .app-nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: 100%;
+        gap: 10px;
+        font-size: smaller;
+    }
 }

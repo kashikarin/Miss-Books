@@ -12,17 +12,13 @@
     box-shadow: 0 0 40px rgba(231, 130, 192, 0.5);
     gap: 5px;
     background-color: #fff;
+    font-size: 0.8rem;
 }
 
-.book-preview-container span {
-    font-size: .8rem;
 
-}
 
 .book-preview-container span:nth-child(1){
     grid-area: title;
-    font-size: 1.2rem;
-    font-variant: small-caps;
 }
 
 .book-preview-container span:nth-child(2){
@@ -35,8 +31,15 @@
 
 .book-preview-container p {
     grid-area: description;
+    text-decoration: underline;
+    text-align: left;
+
+}
+
+.book-preview-container p span {
+    text-decoration: unset;
+    display: inline-block;    
     text-align: justify;
-    font-size: 0.8rem;
 }
 
 .book-preview-container img {
@@ -47,4 +50,13 @@
     object-fit: cover;
     align-self: stretch;
     justify-self: center;
+    text-decoration: underline;
+}
+
+.book-preview-authors {
+    text-transform: capitalize;
+}
+
+.book-preview-title {
+    font-variant: small-caps;
 }
