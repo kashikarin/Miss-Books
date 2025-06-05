@@ -56,7 +56,7 @@ export function BookDetails(){
                     {getPageCountTag() && <p className='book-details-page-count-tag'>{getPageCountTag()}</p>}
                     {getPublishedDateTag() && <p className='book-details-published-date-tag'>{getPublishedDateTag()}</p>}
                 </article>
-                <articles className="book-details-list">
+                <article className="book-details-list">
                     <div className="book-details-grid1">
                         <p>Title<span>: {book.title}</span></p>
                         <p>Subtitle<span>: {book.subtitle}</span></p>
@@ -73,7 +73,7 @@ export function BookDetails(){
                     <div className="book-details-grid3">
                         <p>Description<span>{book.description}</span></p>
                     </div>
-                </articles>
+                </article>
                 <article className="next-prev-btns">
                     <Link to={`/book/${book.prevBookId}`}><button>Previous</button></Link>
                     <Link to={`/book/${book.nextBookId}`}><button>Next</button></Link>

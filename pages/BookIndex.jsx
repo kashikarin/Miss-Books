@@ -32,17 +32,13 @@ export function BookIndex(){
             max = Math.max(max, books[i].listPrice.amount)
         }
         return {min, max}
-    }
-
-
-
+    }      
 
     if (!books) return <h1>Loading...</h1>
     return(
         <section className="book-index-container">
-        <BooksFilter priceRange={getMinMaxPrice()} filterBy={filterBy} onSetFilter={onSetFilter}/>
+        <BooksFilter categories={bookService.getCategories(books)} priceRange={getMinMaxPrice(books)} filterBy={filterBy} onSetFilter={onSetFilter}/>
         <BookList books={books} />
-        <BookDetails />
         </section>        
     )
 }

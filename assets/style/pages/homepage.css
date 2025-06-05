@@ -1,0 +1,9 @@
+h1 {
+    margin: 20px auto;
+    display: inline-block;
+    width: max-content
+}
+
+.home {
+    width: 100%;
+}

@@ -1,8 +1,9 @@
-.logo-h1 {
+.logo {
     font-family:fantasy;
     text-shadow: 1px 1px 3px rgb(49, 44, 44);
     margin: 0;
     line-height: 1;
+    color: white;
 }
 .app-header-container {
     background-color: mediumvioletred;

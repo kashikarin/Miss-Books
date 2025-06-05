@@ -1,7 +1,7 @@
 
 import { LongTxt } from "./LongTxt.jsx"
 export function BookPreview({book, idx}){
-    const maxLength = 100
+    const maxLength = 200
 
     function getBookDescription(){
         if (book.description.length > maxLength){

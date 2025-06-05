@@ -3,6 +3,8 @@ import {HomePage} from './pages/HomePage.jsx'
 import { BookIndex } from "./pages/BookIndex.jsx"
 import { AboutUs } from "./pages/AboutUs.jsx"
 import { BookDetails } from "./pages/BookDetails.jsx"
+import { NotFound } from "./pages/NotFound.jsx"
+
 
 
 const Router = ReactRouterDOM.HashRouter
@@ -20,6 +22,7 @@ export function App() {
                         <Route path='/about' element={<AboutUs />} />
                         <Route path='/book' element={<BookIndex />}/>
                         <Route path='/book/:bookId' element={<BookDetails />}/>
+                        <Route path='/*' element={<NotFound />} />
                     </Routes>
                 </main> 
             </section>

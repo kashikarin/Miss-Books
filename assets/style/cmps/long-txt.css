@@ -1,4 +1,7 @@
 .long-txt-container a {
     font-weight: bold;
     font-style: italic;
+    display: inline-block;
+    text-align: left;
+    
 }

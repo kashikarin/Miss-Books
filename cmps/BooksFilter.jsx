@@ -1,9 +1,8 @@
 import { bookService } from "../services/book.service.js";
 const {useState, useEffect} = React
  
-export function BooksFilter({priceRange, filterBy, onSetFilter}){
+export function BooksFilter({categories, priceRange, filterBy, onSetFilter}){
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
-    
     useEffect(()=>{
         console.log(filterByToEdit);
         
@@ -25,6 +24,12 @@ export function BooksFilter({priceRange, filterBy, onSetFilter}){
         setFilterByToEdit(prevFilter => ({...prevFilter, [name]: value}))
     }
 
+    function getCategoryOptions(){
+        return categories.map(category => <option 
+                        key={category} value={category}>{category}
+                        </option>)
+    }
+    
     return(
         <section className="books-filter-container">
             <h1>Find a book:</h1>
@@ -35,7 +40,6 @@ export function BooksFilter({priceRange, filterBy, onSetFilter}){
                     name='title' 
                     value={filterByToEdit.title}
                     onChange={handleChange}
-
                 />
             </article>
             <article className="price-filter">
@@ -48,8 +52,23 @@ export function BooksFilter({priceRange, filterBy, onSetFilter}){
                     onChange={handleChange}
                     min={priceRange.min}
                     max={priceRange.max}
-                    
             />  <span>{filterByToEdit.price}</span>
+            </article>
+            <article className="author-filter">
+                <label htmlFor="authorFilter">Author: </label>
+                <input type="text" 
+                    id='authorFilter' 
+                    name='author' 
+                    value={filterByToEdit.author}
+                    onChange={handleChange}
+                />
+            </article>
+            <article className="categories-filter">
+                <label htmlFor="categoriesFilter">Category: </label>
+                <select value={filterByToEdit.category} name="category" id="categoriesFilter" onChange={handleChange}>
+                    <option value="">All categories</option>
+                    {getCategoryOptions()}
+                </select>
             </article>
             <button onClick={()=>setFilterByToEdit(bookService.getDefaultFilter())} className="books-filter-clear-btn">Clear Filter</button>
         </section>

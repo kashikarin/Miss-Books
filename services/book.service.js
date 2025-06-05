@@ -11,6 +11,7 @@ export const bookService = {
     save,
     getEmptyBook,
     getDefaultFilter,
+    getCategories
 }
 
 function query(filterBy = {}) {
@@ -22,6 +23,14 @@ function query(filterBy = {}) {
             }
             if (filterBy.price) {
                 books = books.filter(book => book.listPrice.amount >= filterBy.price)
+            }
+            if (filterBy.author) {
+                const regExp = new RegExp(filterBy.author, 'i')
+                books = books.filter(book => regExp.test(...book.authors))
+            }
+            if (filterBy.category) {
+                const regExp = new RegExp(filterBy.category, 'i')
+                books = books.filter(book => regExp.test(...book.categories))
             }
             return books
         })
@@ -49,7 +58,7 @@ function getEmptyBook(title = '', price = '') {
 }
 
 function getDefaultFilter() {
-    return { title: '', price: '' }
+    return { title: '', price: '', author: '', category: '' }
 }
 
 
@@ -97,6 +106,17 @@ function _createBooks() {
         saveToStorage(BOOK_KEY, books)
 }
 
+function getCategories(books){       
+        let categoriesMap = {}
+        for (let i=0; i<books.length; i++) {
+            for (let j=0; j<books[i].categories.length; j++){
+                categoriesMap[books[i].categories[j]] = i
+            }
+        }        
+        return Object.keys(categoriesMap)
+    }
+
+    
 
 // function _createBook(author, speed = 250) {
 //     const book = getEmptyBook(author, speed)
