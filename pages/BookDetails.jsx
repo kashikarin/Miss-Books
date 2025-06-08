@@ -6,6 +6,7 @@ const { useParams, Link, useNavigate } = ReactRouterDOM
 
 export function BookDetails(){
     const [book, setBook] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
     const params = useParams()
     const navigate = useNavigate()
     
@@ -14,9 +15,11 @@ export function BookDetails(){
     }, [params.bookId])
 
     function loadBook(){
+        setIsLoading(true)
         bookService.get(params.bookId)
             .then(setBook)
             .catch(err => console.error('Oops', err))
+            .finally(()=>setIsLoading(false))
     }
 
     function getPageCountTag(){
@@ -48,7 +51,7 @@ export function BookDetails(){
         return 'black'
     }
 
-    if (!book) return <div>Loading...</div>
+    if (isLoading || !book) return <div className="loader">Loading...</div>
     return(
             <section className="book-details-container">
                 <article className="book-details-tags">
