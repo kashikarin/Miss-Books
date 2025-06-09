@@ -11,7 +11,7 @@ export const bookService = {
     save,
     getEmptyBook,
     getDefaultFilter,
-    getCategories
+    getCategories,
 }
 
 function query(filterBy = {}) {
@@ -50,12 +50,29 @@ function save(book) {
     if (book.id) {
         return storageService.put(BOOK_KEY, book)
     } else {
-        return storageService.post(BOOK_KEY, book)
+        let newBook = book
+        const ctgs = ['Love', 'Fiction', 'Poetry', 'Computers', 'Religion']
+
+        newBook.subtitle = makeLorem(4)
+        newBook.authors = [makeLorem(1)],
+        newBook.publishedDate = getRandomIntInclusive(1950, 2024),
+        newBook.description = makeLorem(20),
+        newBook.pageCount = getRandomIntInclusive(20, 600),
+        newBook.categories = [ctgs[getRandomIntInclusive(0, ctgs.length - 1)]],
+        newBook.thumbnail = `http://coding-academy.org/books-photos/${getRandomIntInclusive(1, 20)}.jpg`,
+        newBook.language = "en",
+        newBook.listPrice = {
+            amount: book.price,
+            currencyCode: "EUR",
+            isOnSale: Math.random() > 0.7
+        }
+        delete newBook.price
+        return storageService.post(BOOK_KEY, newBook)
     }
 }
 
 function getEmptyBook(title = '', price = '') {
-    return { title, listPrice: {price, currencyCode: 'EUR', isOnSale: false} }
+    return { title, listPrice: {amount: price, currencyCode: 'EUR', isOnSale: false} }
 }
 
 function getDefaultFilter() {
@@ -117,10 +134,5 @@ function getCategories(books){
         return Object.keys(categoriesMap)
     }
 
-    
 
-// function _createBook(author, speed = 250) {
-//     const book = getEmptyBook(author, speed)
-//     book.id = makeId()
-//     return book
-// }
+

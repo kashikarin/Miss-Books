@@ -32,5 +32,6 @@ a {
     align-items: center;
     justify-content: center;
     margin-block-end: 10px;
+    gap: 10px;
 }
 

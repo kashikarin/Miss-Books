@@ -13,6 +13,9 @@
 @import "pages/aboutus.css";
 @import "pages/bookindex.css";
 @import "pages/book-details.css";
+@import "pages/book-edit.css";
+
+
 
 
 /* Components */
@@ -21,6 +24,6 @@
 @import "cmps/book-preview.css";
 @import "cmps/books-filter.css";
 @import "cmps/long-txt.css";
-
+@import "cmps/user-msg.css";
 
 

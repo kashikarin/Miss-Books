@@ -4,10 +4,12 @@ import {BooksFilter} from '../cmps/BooksFilter.jsx'
 import { BookDetails } from "./BookDetails.jsx"
 
 const {useState, useEffect} = React
+const {useNavigate} = ReactRouterDOM
 
 export function BookIndex(){
     const [books, setBooks] = useState(null)
     const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
+    const navigate = useNavigate()
 
 
     
@@ -39,6 +41,7 @@ export function BookIndex(){
     return(
         <section className="book-index-container">
         <BooksFilter categories={bookService.getCategories(books)} priceRange={getMinMaxPrice(books)} filterBy={filterBy} onSetFilter={onSetFilter}/>
+        <button onClick={()=>navigate('/book/edit')} className="add-book-btn">Add Book</button>
         <BookList books={books} />
         </section>        
     )

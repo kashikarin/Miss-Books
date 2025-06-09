@@ -10,6 +10,7 @@ export function BookList ({books}){
                     <BookPreview book={book} idx={i}/>
                     <section className="book-preview-options">
                         <Link to={`/book/${book.id}`}><button className="book-details-button">Details</button></Link>
+                        <Link to={`/book/edit/${book.id}`}><button className="book-edit-button">Edit</button></Link>
                     </section>
                 </li>
             ))}
