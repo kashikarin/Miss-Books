@@ -1,0 +1,19 @@
+
+
+.further-details-container {
+    display: flex;
+    width: 20%;
+    justify-content: space-between;
+    
+}
+
+.further-details-container a {
+    display: inline-block;
+    margin: 0;
+}
+
+.further-details-container a.active {
+    color: rgb(245, 210, 210);
+    font-weight: 600;
+    text-decoration: underline;
+}
