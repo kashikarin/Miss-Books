@@ -62,11 +62,11 @@ function save(book) {
         newBook.thumbnail = `http://coding-academy.org/books-photos/${getRandomIntInclusive(1, 20)}.jpg`,
         newBook.language = "en",
         newBook.listPrice = {
-            amount: book.price,
+            amount: book.listPrice.amount,
             currencyCode: "EUR",
             isOnSale: Math.random() > 0.7
         }
-        delete newBook.price
+        console.log(newBook)
         return storageService.post(BOOK_KEY, newBook)
     }
 }

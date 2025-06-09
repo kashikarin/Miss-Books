@@ -9,7 +9,7 @@ export function UserMsg(){
         const unsubscribe = eventBusService.on('show-user-msg', msg => {
             setMsg(msg)
             setTimeout(()=>onCloseMsg(), 5000)
-        })
+        })           
         return () => unsubscribe()
     }, [])
     

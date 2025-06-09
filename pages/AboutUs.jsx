@@ -1,6 +1,7 @@
 const {NavLink, Outlet} = ReactRouterDOM
 
 export function AboutUs(){
+    
     return(
         <section className="about">
             <h1>About Miss Books...</h1>

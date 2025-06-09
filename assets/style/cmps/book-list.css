@@ -7,7 +7,6 @@
     flex-wrap: wrap;
     gap: 10px;
     margin: 0 auto;
-
     
 }
 
@@ -19,19 +18,36 @@
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between; 
-    margin-block-end: 
+    position: relative;
 }
 
-a {
-    display: block;
-    margin: 0 auto;
+.books-li-x-btn {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 1px;
+    height: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 
 .book-preview-options {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-block-end: 10px;
-    gap: 10px;
+    gap: 10px;    
 }
 
+.book-preview-options a,
+.book-preview-options button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-block-end: 10px;
+    gap: 10px;
+    margin: 0 auto;
+    
+}

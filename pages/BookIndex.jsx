@@ -37,12 +37,20 @@ export function BookIndex(){
         return {min, max}
     }      
 
+    function onRemoveBook(id){
+        let book = books.find(book => book.id === id)
+        let newBooksArr = books.filter(book => book.id !== id)
+        bookService.remove(id)
+            .then(()=>showSuccessMsg(`${book.title} was removed!`))
+            .then(() => setBooks(newBooksArr))
+            .catch(err => showErrorMsg(`failed to remove ${book.title}`))
+    }
     if (!books) return <h1>Loading...</h1>
     return(
         <section className="book-index-container">
         <BooksFilter categories={bookService.getCategories(books)} priceRange={getMinMaxPrice(books)} filterBy={filterBy} onSetFilter={onSetFilter}/>
         <button onClick={()=>navigate('/book/edit')} className="add-book-btn">Add Book</button>
-        <BookList books={books} />
+        <BookList books={books} onRemoveBook={onRemoveBook}/>
         </section>        
     )
 }
