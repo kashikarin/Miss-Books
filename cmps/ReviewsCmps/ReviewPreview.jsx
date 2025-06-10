@@ -14,12 +14,12 @@ export function ReviewPreview({review, onRemoveReview}) {
             <button onClick={handleRemove} className='remove-review-sign'>Remove</button>
             <h5>{fullname}</h5>
             <article className="stars-container">
-                {ratingArr.map((ratingStar, i) => (<span key={i}>
+                {ratingArr.map((ratingStar, i) => (<span className='star-review-preview' key={i}>
                     {star}
                 </span> ))}
             </article>
             
-            <span>{readDate}</span>           
+            <span className='read-date-review-preview'>Read on: <br /><span>{readDate}</span></span>           
         </section>    
     )
 }

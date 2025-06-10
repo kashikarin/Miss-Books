@@ -4,9 +4,19 @@
     padding: 10px;
     border: 1px solid black;
     width: 140px;
+    background-color: #7e5b85fd;
 }
 
 .stars-container {
     display: flex;
+    margin-bottom: 10px;
+}
+
+.star-review-preview {
+    color: yellow;
+}
+
+.read-date-review-preview {
+    font-size: 1rem;
 }
 
