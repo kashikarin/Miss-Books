@@ -25,5 +25,8 @@
 @import "cmps/books-filter.css";
 @import "cmps/long-txt.css";
 @import "cmps/user-msg.css";
+@import "cmps/add-review.css";
+@import "cmps/review-preview.css";
+@import "cmps/reviews-list.css";
 
 

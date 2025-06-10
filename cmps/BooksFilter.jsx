@@ -6,8 +6,8 @@ export function BooksFilter({categories, priceRange, filterBy, onSetFilter}){
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
 
     const onSetFilterDebounceRef = useRef(debounce(onSetFilter, 400)).current
+    
     useEffect(()=>{
-
            onSetFilterDebounceRef(filterByToEdit)
     }, [filterByToEdit])
     

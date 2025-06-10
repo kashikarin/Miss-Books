@@ -2,6 +2,7 @@ import { bookService } from "../services/book.service.js"
 import { BookList } from "../cmps/BookList.jsx"
 import {BooksFilter} from '../cmps/BooksFilter.jsx'
 import { BookDetails } from "./BookDetails.jsx"
+import { getRandomIntInclusive } from "../services/util.service.js"
 
 const {useState, useEffect} = React
 const {useNavigate} = ReactRouterDOM
@@ -46,11 +47,12 @@ export function BookIndex(){
             .catch(err => showErrorMsg(`failed to remove ${book.title}`))
     }
     if (!books) return <h1>Loading...</h1>
+    
     return(
         <section className="book-index-container">
-        <BooksFilter categories={bookService.getCategories(books)} priceRange={getMinMaxPrice(books)} filterBy={filterBy} onSetFilter={onSetFilter}/>
-        <button onClick={()=>navigate('/book/edit')} className="add-book-btn">Add Book</button>
-        <BookList books={books} onRemoveBook={onRemoveBook}/>
+            <BooksFilter categories={bookService.getCategories(books)} priceRange={getMinMaxPrice(books)} filterBy={filterBy} onSetFilter={onSetFilter}/>
+            <button onClick={()=>navigate('/book/edit')} className="add-book-btn">Add Book</button>
+            <BookList books={books} onRemoveBook={onRemoveBook}/>
         </section>        
     )
 }

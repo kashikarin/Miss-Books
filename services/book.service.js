@@ -10,11 +10,14 @@ export const bookService = {
     remove,
     save,
     getEmptyBook,
+    saveReview,
+    deleteReview,
     getDefaultFilter,
     getCategories,
 }
 
 function query(filterBy = {}) {
+    
     return storageService.query(BOOK_KEY)
         .then(books => {
             if (filterBy.title) {
@@ -59,7 +62,7 @@ function save(book) {
         newBook.description = makeLorem(20),
         newBook.pageCount = getRandomIntInclusive(20, 600),
         newBook.categories = [ctgs[getRandomIntInclusive(0, ctgs.length - 1)]],
-        newBook.thumbnail = `http://coding-academy.org/books-photos/${getRandomIntInclusive(1, 20)}.jpg`,
+        newBook.thumbnail = `http://coding-academy.org/books-photos/${getRandomIntInclusive(1,20)}.jpg`,
         newBook.language = "en",
         newBook.listPrice = {
             amount: book.listPrice.amount,
@@ -79,9 +82,33 @@ function getDefaultFilter() {
     return { title: '', price: '', author: '', category: '' }
 }
 
+function saveReview(bookId, review){ 
+    return get(bookId)
+        .then(book => {
+            if (book.reviews) {
+                let length = book.reviews.length
+                book.reviews.push(review)
+                book.reviews[length - 1].id = length - 1
+            } else {
+                book.reviews = [review]
+            }
+            let length = book.reviews.length
+            book.reviews[length - 1].id = length - 1
+            return storageService.put(BOOK_KEY, book)
+        })
+}
 
-function _setNextPrevBookId(book) {
-    return query().then((books) => {
+function deleteReview(bookId, reviewId){
+    return get(bookId)
+        .then(book => {
+            book.reviews = [...book.reviews.filter(review => review.id !== reviewId)]
+            if (book.reviews.length === 0) delete book.reviews
+            return storageService.put(BOOK_KEY, book)
+        })
+}
+
+function _setNextPrevBookId(book, gFilterBy) {
+    return query(gFilterBy).then((books) => {
         const bookIdx = books.findIndex((currBook) => currBook.id === book.id)
         const nextBook = books[bookIdx + 1] ? books[bookIdx + 1] : books[0]
         const prevBook = books[bookIdx - 1] ? books[bookIdx - 1] : books[books.length - 1]

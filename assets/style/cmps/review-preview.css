@@ -1,0 +1,12 @@
+.review-preview-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border: 1px solid black;
+    width: 140px;
+}
+
+.stars-container {
+    display: flex;
+}
+
