@@ -21,12 +21,16 @@
     top: 50%;
     left: 50%;
     transform:translate(-50%, -50%);
-    background-color: whitesmoke;
+    background-color: var(--clr1bg);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
+}
+
+.add-review-container h4 {
+    color: var(--clr2)
 }
 .rating-stars-container {
     display: flex;

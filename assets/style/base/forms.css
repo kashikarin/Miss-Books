@@ -1,15 +1,17 @@
 button {
     cursor: pointer;
-    background-color: var(--clr2bg);
+    background-color: var(--clr2);
     margin: 0.5em;
-    border: 1px solid var(--clr2);
+    border: 1px solid lightgrey;
     padding: 0.5em 0.8em;
     border-radius: 4px;
+    color: whitesmoke
 }
 
 button:hover {
-    background-color: var(--clr2);
-    color: white;
+    background-color:var(--clr1bg-light);
+    color: var(--clr2);
+    
     transition: 0.3s;
 }
 

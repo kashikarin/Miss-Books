@@ -1,9 +1,13 @@
+
+
+.home-page {
+    width: 100%;
+    color: var(--clr2);
+}
+
 h1 {
     margin: 20px auto;
     display: inline-block;
-    width: max-content
-}
-
-.home {
-    width: 100%;
+    width: max-content;
+    color: var(--clr2);
 }

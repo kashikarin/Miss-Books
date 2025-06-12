@@ -11,14 +11,14 @@
 }
 
 .book-list-container li {
-    border: 4px solid rgba(219, 32, 219, 0.349);
-    box-shadow: 0 0 40px rgba(231, 130, 192, 0.5);
-    background-color: #fff;
+    background-color: var(--clr1bg-light);
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between; 
     position: relative;
+    border-radius: 10px;
+    border: 2px solid var(--clr2)
 }
 
 .books-li-x-btn {

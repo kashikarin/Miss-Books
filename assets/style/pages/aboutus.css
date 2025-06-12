@@ -13,7 +13,7 @@
 }
 
 .further-details-container a.active {
-    color: rgb(245, 210, 210);
+    color: var(--dark-grey);
     font-weight: 600;
     text-decoration: underline;
 }

@@ -2,9 +2,9 @@
     display: flex;
     flex-direction: column;
     padding: 10px;
-    border: 1px solid black;
+    border: 1px dotted var(--clr1bg-light);
     width: 140px;
-    background-color: #7e5b85fd;
+    background-color: var(--clr2);
 }
 
 .stars-container {
@@ -20,3 +20,11 @@
     font-size: 1rem;
 }
 
+.review-preview-container button {
+    background-color: var(--clr1bg-light);
+    color: var(--clr2);
+}
+
+.review-preview-container button:hover {
+    background-color: whitesmoke;
+}
