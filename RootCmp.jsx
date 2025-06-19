@@ -8,7 +8,7 @@ import { BookEdit } from "./pages/BookEdit.jsx"
 import { UserMsg } from "./cmps/UserMsg.jsx"
 import { Team } from "./cmps/AboutCmps/Team.jsx"
 import { Vision } from "./cmps/AboutCmps/Vision.jsx"
-
+import { BookAdd } from "./pages/BookAdd.jsx"
 
 
 const Router = ReactRouterDOM.HashRouter
@@ -27,6 +27,7 @@ export function App() {
                             <Route path='/about/team' element={<Team />}/>   
                             <Route path='/about/vision' element={<Vision />}/>   
                         </Route>
+                        <Route path='/bookAdd' element={<BookAdd />}/>
                         <Route path='/book' element={<BookIndex />}/>
                         <Route path='/book/:bookId' element={<BookDetails />}/>
                         <Route path='/book/edit' element={<BookEdit />}/>

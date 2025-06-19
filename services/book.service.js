@@ -14,6 +14,7 @@ export const bookService = {
     deleteReview,
     getDefaultFilter,
     getCategories,
+    addGoogleBook
 }
 
 function query(filterBy = {}) {
@@ -161,5 +162,15 @@ function getCategories(books){
         return Object.keys(categoriesMap)
     }
 
+//add a simple new book object to our database and return it in a Promise
+function addGoogleBook(book) {
+    let newBook = book
+        const ctgs = ['Love', 'Fiction', 'Poetry', 'Computers', 'Religion']
 
+        newBook.subtitle = makeLorem(4)
+        newBook.listPrice.currencyCode = "EUR"
+        newBook.listPrice.isOnSale = Math.random() > 0.7
+        return storageService.post(BOOK_KEY, newBook)
+        
+}
 
