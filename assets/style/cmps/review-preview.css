@@ -5,6 +5,8 @@
     border: 1px dotted var(--clr1bg-light);
     width: 140px;
     background-color: var(--clr2);
+    position: relative;
+    color: whitesmoke;
 }
 
 .stars-container {
@@ -27,4 +29,12 @@
 
 .review-preview-container button:hover {
     background-color: whitesmoke;
+}
+
+.remove-review-btn {
+    position: absolute;
+    top: -10px;
+    right: -15px;
+    font-size: 0.5em;
+    z-index: 1;
 }

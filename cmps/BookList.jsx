@@ -14,12 +14,12 @@ export function BookList ({books, onRemoveBook}){
             <ul className="book-list-container">
                 {books && books.map((book, i) => (
                     <li key={book.id}>
-                        <BookPreview book={book} idx={i}/>
+                        <BookPreview book={book} idx={i} className='book-preview'/>
                         <button className='books-li-x-btn' onClick={()=>handleRemoveBook(book.id)}>X</button>
                         <section className="book-preview-options">
-                            <Link to={`/book/${book.id}`}><button className="book-details-button">Details</button></Link>
-                            <Link to={`/book/edit/${book.id}`}><button className="book-edit-button">Edit</button></Link>
-                            <button onClick={()=>handleRemoveBook(book.id)}>Remove</button>
+                            <Link to={`/book/${book.id}`}><button className="book-details-button">🔍</button></Link>
+                            <Link to={`/book/edit/${book.id}`}><button className="book-edit-button">🖉</button></Link>
+                            <button onClick={()=>handleRemoveBook(book.id)} className="remove-book-button">🗑️</button>
                         </section>
                     </li>)
                     )

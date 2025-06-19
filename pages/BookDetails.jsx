@@ -46,10 +46,6 @@ export function BookDetails(){
             })
     }
 
-    function onDeleteReview(id){
-
-    }
-
     function onCloseModal(){
         setShowReviewModal(false)
     }
@@ -101,8 +97,8 @@ export function BookDetails(){
     if (isLoading || !book) return <div className="loader">Loading...</div>
     return(
             <section className="book-details-container">
+                {book.listPrice.isOnSale && <span className='on-sale-header'>SALE</span>}
                 <article className="book-details-tags">
-                    {book.listPrice.isOnSale && <img className='book-details-onsale-tag' src='../assets/UtilMedia/saleIcon.png' alt='sale icon' />}
                     {getPageCountTag() && <p className='book-details-page-count-tag'>{getPageCountTag()}</p>}
                     {getPublishedDateTag() && <p className='book-details-published-date-tag'>{getPublishedDateTag()}</p>}
                 </article>
@@ -117,29 +113,29 @@ export function BookDetails(){
                         <p>Categories<span>: {[...book.categories]}</span></p>
                         <p>Price<span>: </span><span style={{color: getPriceColor()}}> {book.listPrice.amount + book.listPrice.currencyCode}</span></p>
                     </div>
-                    <div className="book-details-grid2">
-                        <img src={book.thumbnail} alt={`${book.title} cover image`} />
-                    </div>
-                    <div className="book-details-grid3">
-                        <p>Description<span>{book.description}</span></p>
-                    </div>
+                    <img src={book.thumbnail} className="book-details-grid2" alt={`${book.title} cover image`} />
+                    <p className="book-details-grid3">Description<span>{book.description}</span></p>
                 </article>
-                <article className="readers-reviews-list-container">
+                <article className="reviews-container">
                     <h4>What readers thought: </h4>
-                    {book.reviews && <ReviewsList reviews={book.reviews} max={4} onDeleteReview={onDeleteReview} />}
-                    {!book.reviews && <h3 className='no-reviews-response'>No reviews for this book yet.</h3>}
-                </article>
-                <article className="book-details-rating-container">
+                    <div>
+                        {book.reviews && <ReviewsList reviews={book.reviews} max={3} onDeleteReview={onDeleteReview} />}
+                        {!book.reviews && <span className='no-reviews-response'>No reviews for this book yet.</span>}
+                    </div>                       
                     <h4>Read it? Rate it!</h4>
-                    <button onClick={()=>{
-                        setShowReviewModal(true)
-                    }} className='add-review-modal-btn'>Add Review</button>
+                    <button 
+                        onClick={()=>setShowReviewModal(true)} 
+                        className='add-review-modal-btn'
+                    >
+                        Add Review
+                    </button>
+                </article>                   
+                <article className="nav-btns">
+                    <Link to={`/book/${book.prevBookId}`} className="button-like">Previous</Link>
+                    <button className='book-details-back-btn' onClick={(handleBack)}>Back</button>
+                    <Link to={`/book/${book.nextBookId}`} className="button-like">Next</Link>
+
                 </article>
-                <article className="next-prev-btns">
-                    <Link to={`/book/${book.prevBookId}`}><button>Previous</button></Link>
-                    <Link to={`/book/${book.nextBookId}`}><button>Next</button></Link>
-                </article>
-                <button className='book-details-back-btn' onClick={(handleBack)}>Back</button>
                 {showReviewModal && <AddReview book={book} review={initialReviewDetails} onSaveReview={onSaveReview} onCloseModal={onCloseModal} onDeleteReview={onDeleteReview}/>}
             </section>
     )

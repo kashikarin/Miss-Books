@@ -11,7 +11,7 @@ export function ReviewPreview({review, onRemoveReview}) {
 
     return(
         <section className='review-preview-container'>
-            <button onClick={handleRemove} className='remove-review-sign'>Remove</button>
+            <button onClick={handleRemove} className='remove-review-btn'>X</button>
             <h5>{fullname}</h5>
             <article className="stars-container">
                 {ratingArr.map((ratingStar, i) => (<span className='star-review-preview' key={i}>
