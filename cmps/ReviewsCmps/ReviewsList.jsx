@@ -12,8 +12,11 @@ export function ReviewsList({reviews, max, onDeleteReview}){
     const [reviewsToDisplay, setReviewsToDisplay] = useState([])
     
     useEffect(()=>{
-        if (lastIndexDisplayed - firstIndexDisplayed !== max - 1) setLastIndexDisplayed(prev => prev - 1)
-        setReviewsToDisplay(reviews.slice(firstIndexDisplayed, lastIndexDisplayed + 1))
+       setFirstIndexDisplayed(0)
+       setLastIndexDisplayed(()=>{
+            if (reviews.length > max) return max-1
+            else return reviews.length - 1
+       }) 
     }, [reviews.length])
 
     useEffect(()=>{

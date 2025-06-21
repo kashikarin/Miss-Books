@@ -31,9 +31,24 @@ export function AddReview({onSaveReview, review, onCloseModal}){
         onSaveReview(reviewToSave)
         setReviewToSave(null)
     }
+
+    function getThisDateStr(){
+        let date = new Date()
+        let yyyy = String(date.getFullYear())
+        let mm = date.getMonth()
+        mm += 1
+        mm = String(mm)
+        if (mm < 10){
+            mm = "0" + mm
+        }
+        
+        let dd = String(date.getDate())
+        return `${yyyy}-${mm}-${dd}`
+    }
     const invalidReviewResponse = <h4>One of the fields is missing</h4>
     const star = '\u2606'
     if (!reviewToSave) return null
+    console.log(getThisDateStr())
     return(
         <section className="book-review-container">
             <div className="add-review-modal-cover">
@@ -70,6 +85,7 @@ export function AddReview({onSaveReview, review, onCloseModal}){
                             <input type="date" 
                                    id='readDate' 
                                    name='readDate'
+                                   max={getThisDateStr()}
                                    value={reviewToSave.readDate}
                                    onChange={handleChange}
                             />

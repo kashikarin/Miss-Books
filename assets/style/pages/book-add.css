@@ -8,21 +8,4 @@
     justify-content: center;
 }
 
-.book-add-container ul {
-    width: 100%;
-    align-self: start;
-}
 
-.book-add-container li {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-}
-
-.book-add-container li>span:nth-child(2) {
-    border: 1px solid black;
-    border-radius: 50%;
-    font-size: 0.8em;
-    padding-inline: 5px;
-    cursor: pointer;
-}
