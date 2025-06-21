@@ -14,7 +14,8 @@ export const bookService = {
     deleteReview,
     getDefaultFilter,
     getCategories,
-    addGoogleBook
+    addGoogleBook,
+    searchGoogleBooks
 }
 
 function query(filterBy = {}) {
@@ -173,4 +174,34 @@ function addGoogleBook(book) {
         return storageService.post(BOOK_KEY, newBook)
         
 }
+let gCache = {}
+function searchGoogleBooks(txt){
+    if (!gCache[txt]){
+        return fetch('https://www.googleapis.com/books/v1/volumes?printType=books&q=effective%20javascript')
+        .then(res => res.json())
+        .then(data => data.items)
+        .then(googleItems => {
+            let items = googleItems.filter(googleItem => googleItem.volumeInfo.title.toLocaleLowerCase().includes(txt.toLocaleLowerCase()))
+            gCache[txt] = items
+            console.log('hi1')
+            return items
+        })
+        .catch(err => {
+            console.error('search failed')
+            throw error
+        })
+    } else {
+        console.log('hi2')
+        return Promise.resolve(gCache[txt])
+    }
+}
 
+// function googleBookQuery(txt) {
+//     let cache = {}
+//     if (!bookName) return Promise.resolve()
+    
+//     if (cach[bookName]) return cache.bookName
+//     else {
+//         cache.bookName = 
+//     }
+// }

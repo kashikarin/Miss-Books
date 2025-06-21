@@ -4,32 +4,28 @@ import { debounce, getRandomIntInclusive } from "../services/util.service.js"
 import { SearchBookList } from "../cmps/SearchBookList.jsx"
 
 const {useState, useRef, useEffect} = React
+
 export function BookAdd(){
     
     const [searchField, setSearchField] = useState('')
     const [matchingBooks, setMatchingBooks] = useState([])
-        
+      
+    const debouncedFetch = useRef(debounce(bookService.searchGoogleBooks), 1000).current
+
     useEffect(()=>{
-        fetchMatchingGoogleBooks(searchField)
+        bookService.searchGoogleBooks(searchField)
+            .then(setMatchingBooks)
     }, [])
+
+    useEffect(()=>{
+        debouncedFetch(searchField)
+    }, [searchField])
 
     function handleChange({target}) {
         setSearchField(target.value)
     }
 
-    function handleSubmit(ev){
-        ev.preventDefault()
-        fetchMatchingGoogleBooks(searchField)
-    }
-
-    function fetchMatchingGoogleBooks(searchField) {
-        return fetch('https://www.googleapis.com/books/v1/volumes?printType=books&q=effective%20javascript')
-        .then(res => res.json())
-        .then(data => data.items)
-        .then(googleItems => googleItems.filter(googleItem => googleItem.volumeInfo.title.toLocaleLowerCase().includes(searchField.toLocaleLowerCase())))
-        .then(setMatchingBooks)
-    }
-
+    
     function checkIfBookExists(title) {
         return bookService.query()
             .then(books => books.some(book => book.title.toLocaleLowerCase() === title.toLocaleLowerCase()))
@@ -65,10 +61,7 @@ export function BookAdd(){
     
     return(
         <section className="book-add-container">
-            <form onSubmit={handleSubmit}>
-                <input type="search" value={searchField} placeholder='Search a book online' onChange={handleChange}/>
-                <button>Search Books</button>
-            </form>
+            <input type="search" value={searchField} name='searchField' placeholder='Search a book online' onChange={handleChange}/>
             {matchingBooks.length > 0 && <SearchBookList books={matchingBooks}/>}
         </section>
         
