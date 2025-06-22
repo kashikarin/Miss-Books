@@ -1,6 +1,7 @@
 
 import { LongTxt } from "./LongTxt.jsx"
 
+
 export function BookPreview({book, idx}){
     const maxLength = 200
 

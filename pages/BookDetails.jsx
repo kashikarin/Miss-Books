@@ -2,6 +2,7 @@
 import { bookService } from "../services/book.service.js"
 import { AddReview } from "../cmps/AddReview.jsx"
 import {ReviewsList} from '../cmps/ReviewsCmps/ReviewsList.jsx'
+import { animateCSS } from "../services/util.service.js"
 const { useState, useEffect } = React
 const { useParams, Link, useNavigate } = ReactRouterDOM
 
@@ -14,7 +15,6 @@ export function BookDetails(){
     const [showReviewModal, setShowReviewModal] = useState(false)
     const params = useParams()
     const navigate = useNavigate()
-    
 
     useEffect(()=>{
         loadBook()
@@ -55,8 +55,9 @@ export function BookDetails(){
             .then(()=> showSuccessMsg(`Review to ${book.title} was deleted successfully`))
             .then(()=> setBook((prevBook) => {
                 if (prevBook.reviews.length > 1) {
-                    prevBook.reviews = prevBook.reviews.filter(review => review.id !== reviewId)
-                    return ({...prevBook, reviews: [...prevBook.reviews]})
+                    let filterredReviews = prevBook.reviews.slice(0)
+                    filterredReviews = filterredReviews.filter(review => review.id !== reviewId) 
+                    return ({...prevBook, reviews: [...filterredReviews]})
                 } else {
                     delete prevBook.reviews
                     return ({...prevBook})
@@ -67,9 +68,9 @@ export function BookDetails(){
 
     function getPageCountTag(){
         const {pageCount} = book
-        if (pageCount > 500) return 'Serious Reading'
-        if (pageCount > 200) return 'Descent Reading' 
-        if (pageCount < 100) return 'Light Reading'
+        if (pageCount >= 500) return 'Serious Reading'
+        if (pageCount >= 200) return 'Descent Reading' 
+        if (pageCount <= 100) return 'Light Reading'
         return undefined 
 
     }
@@ -89,8 +90,8 @@ export function BookDetails(){
 
     function getPriceColor(){
         const {amount} = book.listPrice
-        if (amount > 150) return 'red'
-        if (amount < 20) return 'green'
+        if (amount >= 150) return 'red'
+        if (amount <= 20) return 'green'
         return 'black'
     }
 
@@ -124,7 +125,7 @@ export function BookDetails(){
                     </div>                       
                     <h4>Read it? Rate it!</h4>
                     <button 
-                        onClick={()=>setShowReviewModal(true)} 
+                        onClick={()=>setShowReviewModal(true)}
                         className='add-review-modal-btn'
                     >
                         Add Review
@@ -132,7 +133,7 @@ export function BookDetails(){
                 </article>                   
                 <article className="nav-btns">
                     <Link to={`/book/${book.prevBookId}`} className="button-like">Previous</Link>
-                    <button className='book-details-back-btn' onClick={(handleBack)}>Back</button>
+                    <button className='book-details-back-btn' onClick={handleBack}>Back</button>
                     <Link to={`/book/${book.nextBookId}`} className="button-like">Next</Link>
 
                 </article>

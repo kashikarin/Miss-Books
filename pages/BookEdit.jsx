@@ -1,16 +1,22 @@
 import { bookService } from "../services/book.service.js"
-const {useState, useEffect} = React
+import { animateCSS } from "../services/util.service.js"
+const {useState, useEffect, useRef} = React
 const {useNavigate, useParams} = ReactRouterDOM
 
 export function BookEdit(){
     const [bookToEdit, setBookToEdit] = useState(bookService.getEmptyBook())
     const params = useParams()
     const navigate = useNavigate()
+    const elModalRef = useRef()
 
     useEffect(()=>{
         if (params.bookId){
             loadBook()
         }
+    }, [])
+    
+    useEffect(()=>{
+        if (elModalRef.current) animateCSS(elModalRef.current, 'fadeInDown')
     }, [])
 
     function loadBook(){
@@ -36,7 +42,10 @@ export function BookEdit(){
         ev.preventDefault()
         console.log(bookToEdit)
         bookService.save(bookToEdit)
-            .then(()=> showSuccessMsg(`${bookToEdit.title} was saved!`))
+            .then(()=> {
+                showSuccessMsg(`${bookToEdit.title} was saved!`)
+                return animateCSS(elModalRef.current, 'fadeOutUp')
+            })
             .catch(err => showErrorMsg(`failed to save ${bookToEdit.title}`))
             .finally(() => navigate('/book'))
     }
@@ -45,29 +54,32 @@ export function BookEdit(){
     console.log(listPrice)
 
     return(
-        <section className="book-edit-container">
-            <form onSubmit={saveBook}>
-                <div className="edit-title-container">
-                    <label htmlFor="editTitle">Title: </label><br />
-                    <input type="text" 
-                       id='editTitle' 
-                       value={title} 
-                       name='title'
-                       onChange={handleChangeTitle} 
-                    />
-                </div>
-                <div className="edit-price-container">
-                    <label htmlFor="editPrice">Price: </label><br />
-                    <input type="number" 
-                       id='editPrice' 
-                       value={listPrice.amount} 
-                       name='price' 
-                       onChange={handleChangePrice}
-                    />
-                </div>
-                
-                <button className="edit-book-submit-btn">Save</button>
-            </form>
+        <section className="book-edit-wrapper">
+            <div className="book-edit-container" ref={elModalRef}>
+                <h2>{params.bookId? "Update Book Details" : "Add a Book"}</h2>
+                <form onSubmit={saveBook}>
+                    <div className="edit-title-container">
+                        <label htmlFor="editTitle">Title: </label><br />
+                        <input type="text" 
+                        id='editTitle' 
+                        value={title} 
+                        name='title'
+                        onChange={handleChangeTitle} 
+                        />
+                    </div>
+                    <div className="edit-price-container">
+                        <label htmlFor="editPrice">Price: </label><br />
+                        <input type="number" 
+                        id='editPrice' 
+                        value={listPrice.amount} 
+                        name='price' 
+                        onChange={handleChangePrice}
+                        />
+                    </div>
+                    <button className="edit-book-submit-btn">Save</button>
+                </form>    
+            </div>
+            
         </section>
     )
 }

@@ -4,11 +4,11 @@ import { debounce } from "../services/util.service.js";
  
 export function BooksFilter({categories, priceRange, filterBy, onSetFilter}){
     const [filterByToEdit, setFilterByToEdit] = useState(filterBy)
-
     const onSetFilterDebounceRef = useRef(debounce(onSetFilter, 400)).current
     
     useEffect(()=>{
            onSetFilterDebounceRef(filterByToEdit)
+
     }, [filterByToEdit])
     
     function handleChange(ev){
@@ -26,6 +26,11 @@ export function BooksFilter({categories, priceRange, filterBy, onSetFilter}){
         setFilterByToEdit(prevFilter => ({...prevFilter, [name]: value}))
     }
 
+    function onClearFilter(){  
+        setFilterByToEdit({...bookService.getDefaultFilter()})
+        onSetFilter(bookService.getDefaultFilter())
+    }
+
     function getCategoryOptions(){
         return categories.map(category => <option 
                         key={category} value={category}>{category}
@@ -40,7 +45,7 @@ export function BooksFilter({categories, priceRange, filterBy, onSetFilter}){
                 <input type="text" 
                     id='titleFilter' 
                     name='title' 
-                    value={filterByToEdit.title}
+                    value={filterByToEdit.title || ""}
                     onChange={handleChange}
                 />
             </article>
@@ -49,7 +54,7 @@ export function BooksFilter({categories, priceRange, filterBy, onSetFilter}){
                 <input type="range" 
                     id='priceFilter' 
                     name='price' 
-                    value={filterByToEdit.price}
+                    value={filterByToEdit.price || ""}
                     title={filterByToEdit.price} 
                     onChange={handleChange}
                     min={priceRange.min}
@@ -61,7 +66,7 @@ export function BooksFilter({categories, priceRange, filterBy, onSetFilter}){
                 <input type="text" 
                     id='authorFilter' 
                     name='author' 
-                    value={filterByToEdit.author}
+                    value={filterByToEdit.author || ""}
                     onChange={handleChange}
                 />
             </article>
@@ -72,7 +77,7 @@ export function BooksFilter({categories, priceRange, filterBy, onSetFilter}){
                     {getCategoryOptions()}
                 </select>
             </article>
-            <button onClick={()=>setFilterByToEdit(bookService.getDefaultFilter())} className="books-filter-clear-btn">Clear Filter</button>
+            <button onClick={onClearFilter} className="books-filter-clear-btn">Clear Filter</button>
         </section>
     )    
 }

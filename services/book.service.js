@@ -15,7 +15,8 @@ export const bookService = {
     getDefaultFilter,
     getCategories,
     addGoogleBook,
-    searchGoogleBooks
+    searchGoogleBooks,
+    getFilterFromSearchParams
 }
 
 function query(filterBy = {}) {
@@ -196,12 +197,8 @@ function searchGoogleBooks(txt){
     }
 }
 
-// function googleBookQuery(txt) {
-//     let cache = {}
-//     if (!bookName) return Promise.resolve()
-    
-//     if (cach[bookName]) return cache.bookName
-//     else {
-//         cache.bookName = 
-//     }
-// }
+ function getFilterFromSearchParams(srcParams){
+    const txt = srcParams.get('txt') || ""
+    const minSpeed = srcParams.get('minSpeed') || ""
+    return {txt, minSpeed}
+}

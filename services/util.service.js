@@ -44,3 +44,31 @@ export function debounce(func, time = 500){
         }, time)
     }
 }
+
+export function animateCSS(el, animation = 'bounce') {
+    const prefix = 'animate__'
+    return new Promise((resolve, reject) => {
+        const animationName = `${prefix}${animation}`
+        el.classList.add(`${prefix}animated`, animationName)
+        function handleAnimationEnd(event) {
+            event.stopPropagation()
+            el.classList.remove(`${prefix}animated`, animationName)
+            resolve('Animation ended')
+        }
+
+
+        el.addEventListener('animationend', handleAnimationEnd, { once: true })
+    })
+}
+
+export function getTruthyValues(obj) {
+    const newObj = {}
+    for (const key in obj) {
+        const value = obj[key]
+        if (value || typeof value === 'boolean') {
+            newObj[key] = value
+        }
+    }
+    return newObj
+}
+

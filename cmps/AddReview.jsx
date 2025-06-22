@@ -1,10 +1,12 @@
-const {useState, useEffect} = React
+import { animateCSS } from "../services/util.service.js"
+
+const {useState, useEffect, useRef} = React
 
 export function AddReview({onSaveReview, review, onCloseModal}){
     const [reviewToSave, setReviewToSave] = useState(review)
     const [invalidForm, setInvalidForm] = useState(true)
     const [failedSubmission, setFailedSubmission] = useState(false)
-    
+    const elAddReview = useRef()
     useEffect(()=>{
         if (reviewToSave !== null) {
             const {fullname, rating, readDate} = reviewToSave
@@ -15,6 +17,9 @@ export function AddReview({onSaveReview, review, onCloseModal}){
         }
     }, [reviewToSave])
 
+    useEffect(()=>{
+        if (elAddReview.current) animateCSS(elAddReview.current, 'zoomIn')
+    }, [])
     function handleChange({target}){ 
         let {name: field, value} = target
         setReviewToSave(prevReview => ({...prevReview, [field]: value}))
@@ -29,7 +34,10 @@ export function AddReview({onSaveReview, review, onCloseModal}){
         }
         setFailedSubmission(false)
         onSaveReview(reviewToSave)
-        setReviewToSave(null)
+        animateCSS(elAddReview.current, 'zoomOut')
+            .then(()=> setReviewToSave(null))
+        
+        
     }
 
     function getThisDateStr(){
@@ -52,7 +60,7 @@ export function AddReview({onSaveReview, review, onCloseModal}){
     return(
         <section className="book-review-container">
             <div className="add-review-modal-cover">
-                <div className="add-review-container">
+                <div className="add-review-container" ref={elAddReview}>
                     <form onSubmit={handleSubmit}>
                         <button className='review-modal-close-btn' onClick={onCloseModal}>X</button>
                         <h4>Book Rating</h4>

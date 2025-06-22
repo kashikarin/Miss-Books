@@ -1,11 +1,16 @@
 .book-edit-container {
     display:flex;
-    flex-direction: collumn;
-    width: 40%;
-    height: 40%;
+    flex-direction: column;
+    width: 25%;
+    height: 25%;
     background-color: rgb(236, 197, 227);
     margin: 20px auto;
     justify-content: center;
     align-items: center;
 }
 
+
+.book-edit-container h2 {
+    margin-block-end: 50px;
+    color: var(--clr2)
+}
