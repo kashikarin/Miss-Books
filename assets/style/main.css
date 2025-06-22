@@ -20,7 +20,6 @@
 
 
 
-
 /* Components */
 @import "cmps/app-header.css";
 @import "cmps/book-list.css";
@@ -32,6 +31,6 @@
 @import "cmps/review-preview.css";
 @import "cmps/reviews-list.css";
 @import "cmps/search-book-list.css";
-
+@import "pages/books-dashboard.css";
 
 

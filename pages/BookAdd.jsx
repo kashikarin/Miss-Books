@@ -1,6 +1,6 @@
 import { bookService } from "../services/book.service.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
-import { debounce, getRandomIntInclusive } from "../services/util.service.js"
+import { asyncDebounce, getRandomIntInclusive } from "../services/util.service.js"
 import { SearchBookList } from "../cmps/SearchBookList.jsx"
 
 const {useState, useRef, useEffect} = React
@@ -10,15 +10,12 @@ export function BookAdd(){
     const [searchField, setSearchField] = useState('')
     const [matchingBooks, setMatchingBooks] = useState([])
       
-    const debouncedFetch = useRef(debounce(bookService.searchGoogleBooks), 1000).current
-
-    useEffect(()=>{
-        bookService.searchGoogleBooks(searchField)
-            .then(setMatchingBooks)
-    }, [])
+    const debouncedFetch = useRef(asyncDebounce(bookService.searchGoogleBooks), 1000).current
 
     useEffect(()=>{
         debouncedFetch(searchField)
+            .then(setMatchingBooks)
+    
     }, [searchField])
 
     function handleChange({target}) {
@@ -62,7 +59,7 @@ export function BookAdd(){
     return(
         <section className="book-add-container">
             <input type="search" value={searchField} name='searchField' placeholder='Search a book online' onChange={handleChange}/>
-            {matchingBooks.length > 0 && <SearchBookList books={matchingBooks}/>}
+            {matchingBooks && matchingBooks.length > 0 && <SearchBookList books={matchingBooks}/>}
         </section>
         
     )

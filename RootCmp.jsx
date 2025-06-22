@@ -9,6 +9,7 @@ import { UserMsg } from "./cmps/UserMsg.jsx"
 import { Team } from "./cmps/AboutCmps/Team.jsx"
 import { Vision } from "./cmps/AboutCmps/Vision.jsx"
 import { BookAdd } from "./pages/BookAdd.jsx"
+import { BooksDashboard } from "./cmps/BooksDashboard.jsx"
 
 
 const Router = ReactRouterDOM.HashRouter
@@ -32,6 +33,7 @@ export function App() {
                         <Route path='/book/:bookId' element={<BookDetails />}/>
                         <Route path='/book/edit' element={<BookEdit />}/>
                         <Route path='/book/edit/:bookId' element={<BookEdit />} />
+                        <Route path='/book/googlebookssearch' element={<BookAdd />} />
                         <Route path='/*' element={<NotFound />} />
                     </Routes>
                 </main>

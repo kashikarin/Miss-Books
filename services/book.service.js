@@ -16,7 +16,8 @@ export const bookService = {
     getCategories,
     addGoogleBook,
     searchGoogleBooks,
-    getFilterFromSearchParams
+    getFilterFromSearchParams,
+    getBookCountByCategory
 }
 
 function query(filterBy = {}) {
@@ -177,28 +178,49 @@ function addGoogleBook(book) {
 }
 let gCache = {}
 function searchGoogleBooks(txt){
-    if (!gCache[txt]){
-        return fetch('https://www.googleapis.com/books/v1/volumes?printType=books&q=effective%20javascript')
+    if (!txt) return Promise.resolve([])
+    const url = `https://www.googleapis.com/books/v1/volumes?printType=books&q=${txt}`
+    return fetch(url)
         .then(res => res.json())
         .then(data => data.items)
-        .then(googleItems => {
-            let items = googleItems.filter(googleItem => googleItem.volumeInfo.title.toLocaleLowerCase().includes(txt.toLocaleLowerCase()))
-            gCache[txt] = items
-            console.log('hi1')
-            return items
+        .then(items => {
+            if (!gCache[txt]){
+                gCache[txt] = items
+                console.log('hi1')
+                return items
+            } else{
+                                console.log('hi2')
+
+                return Promise.resolve(gCache[txt])
+            }
         })
         .catch(err => {
             console.error('search failed')
-            throw error
+            throw err
         })
-    } else {
-        console.log('hi2')
-        return Promise.resolve(gCache[txt])
-    }
 }
 
  function getFilterFromSearchParams(srcParams){
     const txt = srcParams.get('txt') || ""
     const minSpeed = srcParams.get('minSpeed') || ""
     return {txt, minSpeed}
+}
+
+function getBookCountByCategory(){
+    return storageService.query(BOOK_KEY)
+        .then(books => {
+            let ctgs = getCategories(books)           
+            let ctgsMap = {}
+            for (let i=0; i<ctgs.length; i++) {
+                ctgsMap[ctgs[i]] = 0
+            }
+            let booksMapByCategory = books.reduce((map, book) => {
+                for (let i=0; i<book.categories.length; i++){
+                    map[book.categories[i]]++
+                }
+                return map
+            }, ctgsMap)
+            booksMapByCategory.total = books.length
+            return booksMapByCategory
+        })
 }

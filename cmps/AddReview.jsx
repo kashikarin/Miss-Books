@@ -27,7 +27,6 @@ export function AddReview({onSaveReview, review, onCloseModal}){
     
     function handleSubmit(ev){
         ev.preventDefault()
-        const {fullname, rating, readDate} = reviewToSave
         if (invalidForm) {
             setFailedSubmission(true)
             return 

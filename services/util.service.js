@@ -45,6 +45,20 @@ export function debounce(func, time = 500){
     }
 }
 
+export function asyncDebounce(func, time = 500) {
+  let timeoutId;
+  return (...args) => {
+    clearTimeout(timeoutId);
+    return new Promise((resolve, reject) => {
+      timeoutId = setTimeout(() => {
+        Promise.resolve(func(...args))
+          .then(resolve)
+          .catch(reject);
+      }, time);
+    });
+  };
+}
+
 export function animateCSS(el, animation = 'bounce') {
     const prefix = 'animate__'
     return new Promise((resolve, reject) => {

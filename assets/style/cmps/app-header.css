@@ -40,6 +40,11 @@
 
 .app-header-container a {
     color: white;
+    width: max-content;
+}
+
+.app-header-container a {
+    color: white;
 }
 
 @media screen and (max-width: 500px) {

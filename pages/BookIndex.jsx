@@ -2,18 +2,21 @@ import { bookService } from "../services/book.service.js"
 import { BookList } from "../cmps/BookList.jsx"
 import {BooksFilter} from '../cmps/BooksFilter.jsx'
 import { BookDetails } from "./BookDetails.jsx"
-import { getTruthyValues} from "../services/util.service.js"
+import { animateCSS, getTruthyValues} from "../services/util.service.js"
+import { BooksDashboard } from "../cmps/BooksDashboard.jsx"
 
 
 
-const {useState, useEffect} = React
+const {useState, useEffect, useRef} = React
 const {useNavigate, useSearchParams} = ReactRouterDOM
 
 export function BookIndex(){
-    const [books, setBooks] = useState(null)    
+    const [books, setBooks] = useState(null)
+    const [showMap, setShowMap] = useState(false)    
     const [searchParams, setSearchParams] = useSearchParams()
     const [filterBy, setFilterBy] = useState(bookService.getFilterFromSearchParams(searchParams))
     const navigate = useNavigate()
+    const elDashboardModal = useRef()
     
 
   
@@ -51,13 +54,20 @@ export function BookIndex(){
             .then(() => setBooks(newBooksArr))
             .catch(err => showErrorMsg(`failed to remove ${book.title}`))
     }
+
+    function onCloseDashboard(){
+        setShowMap(false)
+    }
+    
     if (!books) return <h1>Loading...</h1>
     
     return(
         <section className="book-index-container">
             <BooksFilter categories={bookService.getCategories(books)} priceRange={getMinMaxPrice(books)} filterBy={filterBy} onSetFilter={onSetFilter}/>
             <button onClick={()=>navigate('/book/edit')} className="add-book-btn">Add Book</button>
+            <button onClick={()=> setShowMap(true)}>Map Books By Categories</button>
             <BookList books={books} onRemoveBook={onRemoveBook}/>
+            {showMap && <BooksDashboard onCloseDashboard={onCloseDashboard}/>}
         </section>        
     )
 }
