@@ -32,5 +32,9 @@
 @import "cmps/reviews-list.css";
 @import "cmps/search-book-list.css";
 @import "pages/books-dashboard.css";
+@import "cmps/rate-book-stars.css";
+@import "cmps/rate-book-select.css";
+@import "cmps/rate-book-text.css";
+
 
 

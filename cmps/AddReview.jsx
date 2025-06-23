@@ -1,4 +1,5 @@
 import { animateCSS } from "../services/util.service.js"
+import { DynamicCmp } from "./ReviewsCmps/DynamicRatingInputs/DynamicCmp.jsx"
 
 const {useState, useEffect, useRef} = React
 
@@ -6,11 +7,12 @@ export function AddReview({onSaveReview, review, onCloseModal}){
     const [reviewToSave, setReviewToSave] = useState(review)
     const [invalidForm, setInvalidForm] = useState(true)
     const [failedSubmission, setFailedSubmission] = useState(false)
+    const [cmpType, setCmpType] = useState('stars')
     const elAddReview = useRef()
+    
     useEffect(()=>{
         if (reviewToSave !== null) {
-            const {fullname, rating, readDate} = reviewToSave
-            if (fullname && rating && readDate) {
+            if (reviewToSave.fullname && reviewToSave.rating && reviewToSave.readDate) {
                 setInvalidForm(false)
                 setFailedSubmission(false)
             } else setInvalidForm(true)
@@ -52,8 +54,12 @@ export function AddReview({onSaveReview, review, onCloseModal}){
         let dd = String(date.getDate())
         return `${yyyy}-${mm}-${dd}`
     }
+
+    function onSelectRate(rate){
+        setReviewToSave(prevReview => ({...prevReview, rating: rate}))
+    }
+
     const invalidReviewResponse = <h4>One of the fields is missing</h4>
-    const star = '\u2606'
     if (!reviewToSave) return null
     console.log(getThisDateStr())
     return(
@@ -73,18 +79,26 @@ export function AddReview({onSaveReview, review, onCloseModal}){
                             />
                         </article>
                         <article className="review-rating-container">
-                            <label>Rate: </label>
-                            <div className="rating-stars-container">
-                                <div className="rating">
-                                    {[5,4,3,2,1].map(starValue => (
-                                        <span key={starValue}
-                                              className={`star ${reviewToSave.rating >= starValue? "selected" : ""}`}  
-                                              onClick={()=> setReviewToSave(prevReview => ({...prevReview, rating: starValue}))}   
-                                        >
-                                            {star}
-                                        </span>
-                                    ))}
+                            <h5>Select a Rating Method:</h5>
+                            <div className='rating-method-selection'>
+                                <div>
+                                    <input type="radio" id='stars' name='type' value='stars' defaultChecked onChange={(ev) => setCmpType(ev.target.value)}/>
+                                    <label htmlFor="stars">Stars</label>
                                 </div>
+                                <div>
+                                    <input type="radio" id='select' name='type' value='select' onChange={(ev) => setCmpType(ev.target.value)}/>
+                                    <label htmlFor="select">Select</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id='txtBox' name='type' value='text' onChange={(ev) => setCmpType(ev.target.value)}/>
+                                    <label htmlFor="txtBox">Text</label>
+                                </div>
+                            </div>
+                            
+                            
+                            <div className="rating-container">
+                                <label>Rate: </label>
+                                <DynamicCmp cmpType={cmpType} onSelectRate={onSelectRate}/>         
                             </div>                           
                         </article>
                         <article className="read-date-container">

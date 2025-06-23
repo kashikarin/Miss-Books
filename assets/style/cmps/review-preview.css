@@ -7,6 +7,8 @@
     background-color: var(--clr2);
     position: relative;
     color: whitesmoke;
+    max-height: 200px;
+    overflow: hidden;
 }
 
 .stars-container {

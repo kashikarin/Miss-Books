@@ -1,11 +1,8 @@
 import { bookService } from "../services/book.service.js"
 import { BookList } from "../cmps/BookList.jsx"
 import {BooksFilter} from '../cmps/BooksFilter.jsx'
-import { BookDetails } from "./BookDetails.jsx"
-import { animateCSS, getTruthyValues} from "../services/util.service.js"
+import { getTruthyValues} from "../services/util.service.js"
 import { BooksDashboard } from "../cmps/BooksDashboard.jsx"
-
-
 
 const {useState, useEffect, useRef} = React
 const {useNavigate, useSearchParams} = ReactRouterDOM
@@ -18,9 +15,6 @@ export function BookIndex(){
     const navigate = useNavigate()
     const elDashboardModal = useRef()
     
-
-  
-
     useEffect(()=>{
         loadBooks() 
         setSearchParams(getTruthyValues(filterBy))      

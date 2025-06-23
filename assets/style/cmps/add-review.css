@@ -12,16 +12,33 @@
 
 .review-rating-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.review-rating-container h5 {
+    margin-bottom: 0;
+}
+
+.rating-method-selection {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+}
+
+.rating-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
 .add-review-container {
-    width: 35%;
-    height: 35%;
+    width: 30%;
+    height: 40%;
     position: fixed;
     top: 50%;
     left: 50%;
-    transform:translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     background-color: var(--clr1bg);
     display: flex;
     flex-direction: column;
@@ -33,48 +50,32 @@
 .add-review-container h4 {
     color: var(--clr2)
 }
-.rating-stars-container {
-    display: flex;
-    width: 20%;
-    vertical-align: baseline;
-}
+
 
 .review-rating-container label {
     line-height: 2.4;
 }
 
-.star {
-    font-size: 2rem;
-    cursor: pointer;
-}
 
-.rating {
-    unicode-bidi: bidi-override;
-    direction: rtl;
-}
-
-.star:hover:before,
-.star:hover ~ span:before {
-    content: "\2605";
-    position: absolute;
-    color: yellow;
-    
-}
-
-.star.selected:before {
-    content: "\2605";
-    color: yellow;
-    position: absolute;
-
-}
 
 .review-modal-close-btn {
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: -15px;
-    right: -15px;
+    top: -30px;
+    right: -20px;
 }
 
-.
+
+
+.add-review-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.add-review-container button {
+    margin-top: 20px;
+    align-self: center;
+}

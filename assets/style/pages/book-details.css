@@ -1,7 +1,7 @@
 /* main container */
 .book-details-container {
     display: grid;
-    grid-template-columns: minmax(auto, 30vw);
+    grid-template-columns: minmax(auto, 35vw);
     grid-template-areas: 
         "tags"
         "list"

@@ -2,7 +2,6 @@
 import { bookService } from "../services/book.service.js"
 import { AddReview } from "../cmps/AddReview.jsx"
 import {ReviewsList} from '../cmps/ReviewsCmps/ReviewsList.jsx'
-import { animateCSS } from "../services/util.service.js"
 const { useState, useEffect } = React
 const { useParams, Link, useNavigate } = ReactRouterDOM
 

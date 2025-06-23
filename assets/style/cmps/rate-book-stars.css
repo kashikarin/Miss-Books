@@ -1,0 +1,30 @@
+.rating-stars-container {
+    display: flex;
+    width: 20%;
+    vertical-align: baseline;
+}
+
+.star {
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+
+.star:hover:before,
+.star:hover ~ span:before {
+    content: "\2605";
+    position: absolute;
+    color: yellow;
+    
+}
+
+.star.selected:before {
+    content: "\2605";
+    color: yellow;
+    position: absolute;
+
+}
