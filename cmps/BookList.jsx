@@ -8,7 +8,6 @@ const {Link} = ReactRouterDOM
 
 const bookDetailsIcon = <i className="fa-solid fa-magnifying-glass"></i>
 const bookEditIcon = <i className="fa-solid fa-pencil"></i>
-const removeBookIcon = <i className="fa-regular fa-trash-can"></i>
 
 export function BookList ({books, onRemoveBook}){
     const bookPreviewRef = useRef()
@@ -28,7 +27,6 @@ export function BookList ({books, onRemoveBook}){
                         <section className="book-preview-options">
                             <Link to={`/book/${book.id}`}><button className="book-details-button">{bookDetailsIcon}</button></Link>
                             <Link to={`/book/edit/${book.id}`}><button className="book-edit-button">{bookEditIcon}</button></Link>
-                            <button onClick={()=>handleRemoveBook(book.id)} className="remove-book-button">{removeBookIcon}</button>
                         </section>
                     </li>)
                     )

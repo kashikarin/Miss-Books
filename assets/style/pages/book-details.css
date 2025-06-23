@@ -1,7 +1,7 @@
 /* main container */
 .book-details-container {
     display: grid;
-    grid-template-columns: minmax(auto, 35vw);
+    grid-template-columns: minmax(auto, 500px);
     grid-template-areas: 
         "tags"
         "list"
@@ -75,11 +75,29 @@
     grid-area: grid1;
 }
 
+.book-details-grid1 p {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: 4px 0;
+
+}
+
+.p-label {
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.book-details-list span {
+    display: inline-block;
+}
+
 .book-details-grid2 {
     grid-area: grid2;
     align-self: stretch;    
 
 }
+
 
 .book-details-grid3 {
     grid-area: grid3;
@@ -88,12 +106,9 @@
     align-self: stretch;    
     margin-bottom: 0;
 }
-.book-details-list p{
-    text-decoration: underline;
-}
+
 
 .book-details-list span{
-    text-decoration: none;
     display: inline-block;
 }
 
@@ -123,7 +138,8 @@
     place-self: center;
     display: inline-block;
     width: max-content;
-    margin-bottom: 2em;
+    margin-block-end: 30px; 
+
 }
 
 /* Nav-btns container */
@@ -154,16 +170,29 @@
     transition: 0.3s;
 }
 
-.nav-btns button, a {
+.nav-btns button {
     width: 5rem;
     height: 2rem;
+    font-size: 0.8em;
 }
 
 .book-details-back-btn {
-    width: 5rem;
+    width: 100px;
     height: 2rem;
-    margin: 0 auto;
+    margin: 10px;
     background-color: var(--dark-grey);
     color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
 }
 
+.button-like {
+    padding: 10px;
+    font-size: 15px;
+    height: 2rem;
+    margin: 10px;
+    width: 100px;
+}

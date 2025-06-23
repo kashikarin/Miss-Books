@@ -1,8 +1,8 @@
 .book-edit-container {
     display:flex;
     flex-direction: column;
-    width: 25%;
-    height: 25%;
+    width: 30%;
+    height: 30%;
     background-color: rgb(236, 197, 227);
     margin: 20px auto;
     justify-content: center;
@@ -11,6 +11,10 @@
 
 
 .book-edit-container h2 {
-    margin-block-end: 50px;
     color: var(--clr2)
+} 
+
+.edit-book-submit-btn {
+    display: inline-block;
+    
 }

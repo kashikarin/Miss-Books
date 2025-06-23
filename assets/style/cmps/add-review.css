@@ -75,7 +75,7 @@
     align-items: start;
 }
 
-.add-review-container button {
-    margin-top: 20px;
-    align-self: center;
+.edit-book-submit-btn {
+    margin-block-start: 15px;
+
 }

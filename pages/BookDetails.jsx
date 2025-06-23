@@ -104,14 +104,42 @@ export function BookDetails(){
                 </article>
                 <article className="book-details-list">
                     <div className="book-details-grid1">
-                        <p>Title<span>: {book.title}</span></p>
-                        <p>Subtitle<span>: {book.subtitle}</span></p>
-                        <p>{book.authors.length > 1? 'Authors:' : 'Author:' }<span>: {[...book.authors]}</span></p>
-                        <p>Published on<span>: {book.publishedDate}</span></p>
-                        <p>Number of pages<span>: {book.pageCount}</span></p>
-                        <p>Language<span>: {book.language}</span></p>
-                        <p>Categories<span>: {[...book.categories]}</span></p>
-                        <p>Price<span>: </span><span style={{color: getPriceColor()}}> {book.listPrice.amount + book.listPrice.currencyCode}</span></p>
+                        <p className="book-detail-line">
+                            <span className='p-label'>Title:</span>
+                            <span>{book.title}</span>
+                        </p>
+                        <p className="book-detail-line">
+                            <span className='p-label'>Subtitle:</span>
+                            <span>{book.subtitle}</span>
+                        </p>
+                        <p className="book-detail-line">
+                            <span className='p-label'>{book.authors.length > 1? 'Authors:' : 'Author:' }</span>
+                            <span>{book.subtitle}</span>
+                        </p>
+                        <p className="book-detail-line">
+                            <span className='p-label'></span>
+                            <span> {[...book.authors]}</span>
+                        </p>
+                        <p className="book-detail-line">
+                            <span className='p-label'>Published on:</span>
+                            <span>{book.publishedDate}</span>
+                        </p>
+                        <p className="book-detail-line">
+                            <span className='p-label'>Number of pages:</span>
+                            <span>{book.pageCount}</span>
+                        </p>
+                        <p className="book-detail-line">
+                            <span className='p-label'>Language:</span>
+                            <span>{book.language}</span>
+                        </p>
+                        <p className="book-detail-line">
+                            <span className='p-label'>Categories:</span>
+                            <span>{[...book.categories]}</span>
+                        </p>
+                        <p className="book-detail-line">
+                            <span className='p-label'>Price:</span>
+                            <span style={{color: getPriceColor()}}> {book.listPrice.amount + book.listPrice.currencyCode}</span>
+                        </p>
                     </div>
                     <img src={book.thumbnail} className="book-details-grid2" alt={`${book.title} cover image`} />
                     <p className="book-details-grid3">Description<span>{book.description}</span></p>

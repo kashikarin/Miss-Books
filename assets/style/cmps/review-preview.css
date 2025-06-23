@@ -8,7 +8,6 @@
     position: relative;
     color: whitesmoke;
     max-height: 200px;
-    overflow: hidden;
 }
 
 .stars-container {
@@ -39,4 +38,4 @@
     right: -15px;
     font-size: 0.5em;
     z-index: 1;
-}
+} 

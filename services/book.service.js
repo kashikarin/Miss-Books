@@ -14,6 +14,7 @@ export const bookService = {
     deleteReview,
     getDefaultFilter,
     getCategories,
+    getMinMaxPrice,
     addGoogleBook,
     searchGoogleBooks,
     getFilterFromSearchParams,
@@ -165,6 +166,23 @@ function getCategories(books){
         return Object.keys(categoriesMap)
     }
 
+      // NOTICE_CR move to util.service.js
+  // NOTICE_CR this is dependent on the books array, but the filter refetches the books, so if i push the price to the max it re-fetches the books and need to reload the page to change agine
+function getMinMaxPrice(filterBy) {
+    return query(filterBy)
+        .then(books => {
+            if (!books || !books.length) return { min: 0, max: 600 };
+            let min = books[0].listPrice.amount;
+            let max = books[0].listPrice.amount;
+            for (let i = 1; i < books.length; i++) {
+            min = Math.min(min, books[i].listPrice.amount);
+            max = Math.max(max, books[i].listPrice.amount);
+            }
+            return { min, max };
+        })
+  }
+
+    
 //add a simple new book object to our database and return it in a Promise
 function addGoogleBook(book) {
     let newBook = book
