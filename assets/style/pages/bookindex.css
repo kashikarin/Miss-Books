@@ -6,5 +6,9 @@
     justify-content: center;
     align-items: center;
     gap: 15px;
+    padding-bottom: 20px;
 }
 
+.book-index-container>button {
+    margin: 0;
+}

@@ -1,6 +1,5 @@
 
 import { BookPreview } from "./BookPreview.jsx"
-import { bookService } from "../services/book.service.js"
 import { animateCSS } from "../services/util.service.js"
 
 const {useRef} = React
@@ -10,7 +9,7 @@ const bookDetailsIcon = <i className="fa-solid fa-magnifying-glass"></i>
 const bookEditIcon = <i className="fa-solid fa-pencil"></i>
 
 export function BookList ({books, onRemoveBook}){
-    const bookPreviewRef = useRef()
+    const bookPreviewRef = useRef() 
     function handleRemoveBook(id){
         animateCSS(bookPreviewRef.current)
         onRemoveBook(id)
